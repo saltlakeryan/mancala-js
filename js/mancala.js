@@ -444,21 +444,21 @@ var makeTurnIndicator = function(inNodeId) {
   };
 }
 
-var createGameSubNodes = function(parentNode) {
-  var turnIndicatorNode = document.createElement("div");
-  turnIndicatorNode.id = 'turnIndicatorNode';
-
-  var boardNode = document.createElement("div");
-  boardNode.id = 'boardNode';
-
-  parentNode.appendChild(turnIndicatorNode);
-  parentNode.appendChild(boardNode);
-  return [boardNode, turnIndicatorNode];
-}
-
 var makeGame = function(inNodeId) {
+  var makeGameSubNodes = function(parentNode) {
+    var turnIndicatorNode = document.createElement("div");
+    turnIndicatorNode.id = 'turnIndicatorNode';
+
+    var boardNode = document.createElement("div");
+    boardNode.id = 'boardNode';
+
+    parentNode.appendChild(turnIndicatorNode);
+    parentNode.appendChild(boardNode);
+    return [boardNode, turnIndicatorNode];
+  }
+
   var parentNode = document.getElementById(inNodeId);
-  var subNodes = createGameSubNodes(parentNode);
+  var subNodes = makeGameSubNodes(parentNode);
   var boardNode = subNodes[0];
   var turnIndicatorNode = subNodes[1];
 
