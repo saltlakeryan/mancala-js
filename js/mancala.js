@@ -66,7 +66,7 @@ var makeBoardView = function(boardToRepresent, inNodeId) {
   var paper;
   var border;
   var initialized = false;
-  var p1_mancala, p2_mancala;
+  var p1Mancala, p2Mancala;
   var allCups;
   var playerIndicator = function() {};
   var player;
@@ -106,64 +106,64 @@ var makeBoardView = function(boardToRepresent, inNodeId) {
   };
 
   var makeVerticalLine = function(x) {
-      var line_def = "M" + x + ",0L" + x + "," + (height );
-      paper.path( line_def );
+      var lineDef = "M" + x + ",0L" + x + "," + (height );
+      paper.path( lineDef );
   };
 
   var makeHorizontalLine = function(y) {
-      var line_def = "M0," + y + "L" + width + "," + y;
-      paper.path( line_def );
+      var lineDef = "M0," + y + "L" + width + "," + y;
+      paper.path( lineDef );
   };
 
   var makeGrid = function() {
-      var eighth_width = width / 8;
-      makeVerticalLine(eighth_width);
-      makeVerticalLine(eighth_width * 2);
-      makeVerticalLine(eighth_width * 3);
-      makeVerticalLine(eighth_width * 4);
-      makeVerticalLine(eighth_width * 5);
-      makeVerticalLine(eighth_width * 6);
-      makeVerticalLine(eighth_width * 7);
-      var half_height = height / 2;
-      makeHorizontalLine(half_height);
+      var eighthWidth = width / 8;
+      makeVerticalLine(eighthWidth);
+      makeVerticalLine(eighthWidth * 2);
+      makeVerticalLine(eighthWidth * 3);
+      makeVerticalLine(eighthWidth * 4);
+      makeVerticalLine(eighthWidth * 5);
+      makeVerticalLine(eighthWidth * 6);
+      makeVerticalLine(eighthWidth * 7);
+      var halfHeight = height / 2;
+      makeHorizontalLine(halfHeight);
   };
 
   var createCups = function() {
     if ( !initialized ) {
       initialized = true;
       //makeGrid();
-      var sixteenth_width = width / 16;
-      var eighth_width = width / 8;
-      var cup_margin = eighth_width / 10;
-      var cup_height_radius = (height / 4) - cup_margin;
-      var cup_width_radius = (eighth_width / 2) - cup_margin;
-      var offset = sixteenth_width + eighth_width;
+      var sixteenthWidth = width / 16;
+      var eighthWidth = width / 8;
+      var cupMargin = eighthWidth / 10;
+      var cupHeightRadius = (height / 4) - cupMargin;
+      var cupWidthRadius = (eighthWidth / 2) - cupMargin;
+      var offset = sixteenthWidth + eighthWidth;
       var y = (height / 2) + (height / 4) ;
       var x = offset;
 
-      var p1_cups = [];
+      var p1Cups = [];
       for(var i = 0; i < 6; i++) {
-        p1_cups.push( new CupView(paper, x, y, [0,i], cup_width_radius, cup_height_radius ));
-        x += eighth_width;
+        p1Cups.push( new CupView(paper, x, y, [0,i], cupWidthRadius, cupHeightRadius ));
+        x += eighthWidth;
       }
-      p1_mancala = new CupView(paper, x, y - (height / 4), [0,6], cup_width_radius, cup_height_radius * 2);
-      p1_mancala.setBeads(0);
-      p1_cups.push(p1_mancala);
+      p1Mancala = new CupView(paper, x, y - (height / 4), [0,6], cupWidthRadius, cupHeightRadius * 2);
+      p1Mancala.setBeads(0);
+      p1Cups.push(p1Mancala);
 
       y -= height / 2;
-      x -= eighth_width;
+      x -= eighthWidth;
 
-      var p2_cups = [];
+      var p2Cups = [];
       for(var i = 0; i < 6; i++) {
-        p2_cups.push( new CupView(paper, x, y, [1,i], cup_width_radius, cup_height_radius ));
-        x -= eighth_width;
+        p2Cups.push( new CupView(paper, x, y, [1,i], cupWidthRadius, cupHeightRadius ));
+        x -= eighthWidth;
       }
-      p2_mancala = new CupView(paper, x, y + (height / 4), [1,6], cup_width_radius, cup_height_radius * 2);
-      p2_mancala.setBeads(0);
-      p2_cups.push(p2_mancala);
+      p2Mancala = new CupView(paper, x, y + (height / 4), [1,6], cupWidthRadius, cupHeightRadius * 2);
+      p2Mancala.setBeads(0);
+      p2Cups.push(p2Mancala);
 
-      allCups = [p1_cups,
-                 p2_cups];
+      allCups = [p1Cups,
+                 p2Cups];
     }
   };
 
