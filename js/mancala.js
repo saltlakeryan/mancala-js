@@ -444,6 +444,11 @@ var makeTurnIndicator = function(inNodeId) {
   };
 }
 
+var makeMenu = function(inMenuNodeId) {
+  var el = document.createElement('div');
+  document.getElementById(inMenuNodeId).appendChild(el);
+}
+
 var makeGame = function(inNodeId) {
   var makeGameSubNodes = function(parentNode) {
     var turnIndicatorNode = document.createElement("div");
@@ -452,18 +457,24 @@ var makeGame = function(inNodeId) {
     var boardNode = document.createElement("div");
     boardNode.id = 'boardNode';
 
+    var menuNode = document.createElement("div");
+    menuNode.id = 'menuNode';
+
     parentNode.appendChild(turnIndicatorNode);
     parentNode.appendChild(boardNode);
-    return [boardNode, turnIndicatorNode];
+    parentNode.appendChild(menuNode);
+    return [boardNode, turnIndicatorNode, menuNode];
   }
 
   var parentNode = document.getElementById(inNodeId);
   var subNodes = makeGameSubNodes(parentNode);
   var boardNode = subNodes[0];
   var turnIndicatorNode = subNodes[1];
+  var menuNode = subNodes[2];
 
   var board = new Board();
   var boardView = new BoardView(board, boardNode.id);
+  var menu = new Menu(menuNode.id);
   var rules = new MancalaRules(board);
   var turnIndicator = new TurnIndicator(turnIndicatorNode.id);
   var draw = function() {
@@ -475,6 +486,7 @@ var makeGame = function(inNodeId) {
     board: board,
     view: boardView,
     rules: rules,
+    menu: menu,
     draw: draw
   };
 };
@@ -497,6 +509,10 @@ var MancalaRules = function(inBoard) {
 
 var TurnIndicator = function(inNodeId) {
   return makeTurnIndicator(inNodeId);
+};
+
+var Menu = function(inNodeId) {
+  return makeMenu(inNodeId);
 };
 
 var Game = function(inNodeId) {
